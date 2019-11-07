@@ -25,7 +25,7 @@ export default class App extends Component {
           <Card>
             <CardItem>
               <Body>
-                <Text>Commits History:</Text>
+                <Text>Commits History: {this.state.DEFAULT_REPO}</Text>
                 <GitHubCommitView repo={this.state.DEFAULT_REPO}/>
               </Body>
             </CardItem>
