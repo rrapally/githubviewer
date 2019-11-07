@@ -15,12 +15,12 @@ export default class GitHubCommitView extends Component {
   }
   handleChange(e) {
     this.setState({
-        DEFAULT_REPO: e.nativeEvent.text
+      DEFAULT_REPO: e.nativeEvent.text
     });
   }
   handleSubmit() {
-      console.log(this.props);
-      this.loadData(this.props.repo);
+    console.log(this.props);
+    this.loadData(this.props.repo);
   }
 
   componentDidMount() {
@@ -29,26 +29,40 @@ export default class GitHubCommitView extends Component {
 
   loadData(repo) {
     getGitHubRepositoryCommits(repo).then(response => {
-        this.setState({ commitData: response});
+      if (response.message === 'Not Found') {
+        this.setState({
+          error: true
+        });
+      }
+      else {
+        this.setState({ commitData: response });
+      }
     });
   }
 
   render() {
-    
-      console.log("data : " + this.state.commitData);
+    console.log("render data : " + this.state.commitData);
+    if (this.state.error != true) {
       return (this.state.commitData.map(item => (
-          <>
-            <Text style={styles.description}>
-              ______________________________________________
+        <>
+          <Text style={styles.description}>
+            ______________________________________________
           </Text>
-            <Text style={styles.author}>Author : {item.commit.author.name}</Text>
-            <Text style={styles.messagekey}>Commit#</Text>
-            <Text style={styles.messagevalue}>{item.sha}</Text>
-            <Text style={styles.messagekey}>Commit Message :</Text>
-            <Text style={styles.messagevalue}>{item.commit.message}</Text>
-          </>
-        )));
+          <Text style={styles.author}>Author : {item.commit.author.name}</Text>
+          <Text style={styles.messagekey}>Commit#</Text>
+          <Text style={styles.messagevalue}>{item.sha}</Text>
+          <Text style={styles.messagekey}>Commit Message :</Text>
+          <Text style={styles.messagevalue}>{item.commit.message}</Text>
+        </>
+      )));
+    } else {
+      return (
+        <>
+          <Text style={styles.description}>No Data found!</Text>
+        </>
+      );
     }
+  }
 }
 
 const styles = StyleSheet.create({
