@@ -1,1 +1,2 @@
-# githubviewer
+# githubreader
+Github Reader
