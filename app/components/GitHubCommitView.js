@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text} from 'react-native';
 import { getGitHubRepositoryCommits } from "../services/GitHubService";
 
 export default class GitHubCommitView extends Component {
@@ -30,7 +30,7 @@ export default class GitHubCommitView extends Component {
   }
 
   render() {
-    console.log("render data : " + this.state.commitData);
+    //console.log("render data : " + this.state.commitData);
     if (this.state.error != true) {
       return (this.state.commitData.map(item => (
         <>
