@@ -10,17 +10,6 @@ export default class GitHubCommitView extends Component {
       noData: true,
       error: false
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleChange(e) {
-    this.setState({
-      DEFAULT_REPO: e.nativeEvent.text
-    });
-  }
-  handleSubmit() {
-    console.log(this.props);
-    this.loadData(this.props.repo);
   }
 
   componentDidMount() {
